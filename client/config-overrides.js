@@ -1,11 +1,8 @@
-const { override, overrideDevServer } = require('customize-cra');
+const { override, addWebpackAlias } = require("customize-cra");
+const path = require("path");
 
-const devServerConfig = () => config => {
-  config.allowedHosts = ['localhost'];
-  return config;
-};
-
-module.exports = {
-  webpack: override(),
-  devServer: overrideDevServer(devServerConfig())
-};
+module.exports = override(
+  addWebpackAlias({
+    ["@components"]: path.resolve(__dirname, "src/components")
+  })
+);
